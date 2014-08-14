@@ -1,0 +1,62 @@
+<%= form_for(@funcionario) do |f| %>
+
+<div class="control-group">
+
+	<%= f.label :nome, "Nome: ", :class => "control-label" %>
+
+	<div class="controls">
+
+		<%= f.text_field :nome, :value => "#{@funcionario.nome}" %>
+
+	</div>
+
+</div>
+
+<div class="control-group">
+
+	<%= f.label :contratacao, "Data de Contratação: ", :class => "control-label" %>
+
+	<div class="controls">
+
+		<%= f.text_field :contratacao, 
+		:value => "#{@funcionario.contratacao.strftime("%d/%m/%y") unless @funcionario.contratacao.nil?}" ,
+		:class => "date",
+		:maxlenght => "10",
+		:size => "10"
+		%>
+
+	</div>
+
+</div>
+
+<div class="control-group">
+
+	<%= f.label :ativo, "Ativo?: ", :class => "control-label" %>
+
+	<div class="controls">
+
+		<%= f.check_box :ativo, :value => @funcionario.ativo %>
+
+	</div>
+
+</div>
+
+<div class="control-group">
+
+	<%= f.label :departamento_id, "Departamento: ", :class => "control-label" %>
+
+	<div class="controls">
+
+		<%= f.select :departamento_id, 
+		options_from_collection_for_select(@departamentos, 'id', 'nome', @funcionario.departamento_id) %>
+
+
+	</div>
+
+	 <div class="form-actions">
+      <%= f.submit "Gravar", :class => "btn btn-primary" %>
+    </div>
+
+</div>
+
+<% end %>
